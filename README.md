@@ -14,4 +14,4 @@ However I'd not use this patterns because of lengthy code.
 ### Factory method
 It delegates the creation of different types of objects and defines an interface for creating an object, but let subclasses decide which class to instantiate. 
 Factory Method lets a class defer instantiation to subclasses.
-
+It'd useful to handle several categorized data which have same functions(actions) but different content.
