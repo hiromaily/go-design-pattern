@@ -20,7 +20,7 @@ type singleton struct {
 const (
 	Add command = iota + 1
 	Reduce
-	ReceiveNumber
+	Receive
 	Stop
 )
 
@@ -56,7 +56,7 @@ func startTicker() {
 					instance.add()
 				case Reduce:
 					instance.reduce()
-				case ReceiveNumber:
+				case Receive:
 					instance.Receiver <- instance.uniqueNumber
 				case Stop:
 					instance.stop()
@@ -68,6 +68,7 @@ func startTicker() {
 	}()
 }
 
+// Get() returns instance as Singleton
 func Get() *singleton {
 	if instance == nil {
 		instance = new(singleton)
@@ -75,26 +76,26 @@ func Get() *singleton {
 	return instance
 }
 
-//add number
+// add number
 func (s *singleton) add() {
 	fmt.Println(" -> add")
 	s.uniqueNumber++
 }
 
-//reduce number
+// reduce number
 func (s *singleton) reduce() {
 	fmt.Println(" -> reduce")
 	s.uniqueNumber--
 }
 
-//stop timer
+// stop timer
 func (s *singleton) stop() {
 	fmt.Println(" -> stop")
 	s.ticker.Stop()
 }
 
 func (s *singleton) GetNumber() int {
-	s.Controller <- ReceiveNumber //get number
+	s.Controller <- Receive
 	return <-s.Receiver
 }
 
