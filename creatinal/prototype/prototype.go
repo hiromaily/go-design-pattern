@@ -1,5 +1,8 @@
 package prototype
 
+// TODO: this way seems nice.
+// http://blog.ralch.com/tutorial/design-patterns/golang-prototype/
+
 type producter interface {
 	clone() producter
 	GetName() string
